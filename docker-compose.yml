@@ -1,0 +1,19 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ~/workspace/mongo:/data/db
+    networks:
+      - mongo-network
+
+networks:
+  mongo-network:
+    external: true
+#docker network create mongo-network
