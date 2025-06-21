@@ -1,0 +1,18 @@
+services:
+  nodeapp:
+    image: node:20
+    container_name: node-server
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm run dev"
+    environment:
+      - MONGO_URL=mongodb://root:example@mongodb:27017/biblioteca?authSource=admin
+    networks:
+      - mongo-network
+networks:
+  mongo-network:
+    external: true
